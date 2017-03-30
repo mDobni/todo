@@ -10,6 +10,12 @@ router.use(bodyParser.json());
 router.use('/', (req, res) => res.json('Hello World!'));
 app.use(router);
 
-console.log('Server listening on port ${process.env.NODE_ENV} with config\n${JSON.stringify(config, 0, 2)}');
+const globals = {
+  config,
+  router,
+};
+require('./controllers/rest/router')(globals);
+
+console.log(`Server listening on port ${process.env.NODE_ENV} with config\n${JSON.stringify(config, 0, 2)}`);
 
 app.listen(config.infrastructure.port);
