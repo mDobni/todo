@@ -10,7 +10,7 @@ module.exports = globals => serviceName => ({
   update: params => query => body =>
     globals.repositories[serviceName].save(params)(query)(body),
 
-  delete: params => query => body => 
+  delete: params => query => body =>
     globals.repositories[serviceName].delete(params)(query)(body),
 
 });

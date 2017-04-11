@@ -7,6 +7,6 @@ module.exports = (globals) => {
     create: params => query => body =>
       globals.repositories.user
       .save(params)(query)(body)
-      .then(([id])) => base.get(({ id })(query)(body)),
-    });
+      .then(([id]) => base.get({ id })(query)(body)),
+  });
 };

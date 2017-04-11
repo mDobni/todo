@@ -1,40 +1,32 @@
-const Promise = require('bluebird');
-
-const mockUser = (id, body) => (Object.asing({
-  id: `${id || Math.ceil(Math.random() * 1000)}`,
-  type: 'user',
-  content: 'my random User',
-}, body));
-
 module.exports = globals => [
   {
     description: 'Get all users',
     method: 'get',
     route: '/user',
-    cb: (params, query, body) => Promise.resolve([mockUser(params.id), mockUser(params.id + 1)]),
+    cb: (params, query, body) => globals.services.user.get(params)(query)(body),
   },
   {
     description: 'Get a user',
     method: 'get',
     route: '/user/:id',
-    cb: (params, query, body) => Promise.resolve([mockUser(params.id)]),
+    cb: (params, query, body) => globals.services.user.get(params.id)(query)(body),
   },
   {
     description: 'Create a user',
     method: 'post',
     route: '/user',
-    cb: (params, query, body) => Promise.resolve([mockUser(params.id, body)]),
+    cb: (params, query, body) => globals.services.user.post(params)(query)(body),
   },
   {
     description: 'Modify a user',
     method: 'put',
     route: '/user/:id',
-    cb: (params, query, body) => Promise.resolve([mockUser(params.id, body)]),
+    cb: (params, query, body) => globals.services.user.put(params)(query)(body),
   },
   {
     description: 'Delete a user',
     method: 'delete',
     route: '/user/:id',
-    cb: (params, query, body) => Promise.resolve([1]),
+    cb: (params, query, body) => globals.services.user.delete(params)(query)(body),
   },
 ];
