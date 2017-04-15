@@ -1,15 +1,10 @@
-const Promise = require('bluebird');
+// ./repositories/user.js
 
-const mockUser = (id, body) => (Object.assing({
-  id: `${id || Math.ceil(Math.random() * 1000)}`,
-  type: 'user',
-  content: 'my random User',
-}, body));
+const _ = require('lodash');
+const baseRepositories = require('./base');
 
-module.exports = () => ({
-  get: ({ id }) => query => body => (!id
-  ? Promise.resolve([mockUser(id), mockUser(id + 1)])
-  : Promise.resolve([mockUser(id)])),
-  save: ({ id }) => query => body => Promise.resolve([1]),
-  delete: params => query => body => Promise.resolve([1]),
-});
+module.exports = (globals) => {
+  const base = baseRepositories(globals)('todo');
+
+  return _.merge({}, base, {});
+};

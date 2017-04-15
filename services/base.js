@@ -13,4 +13,8 @@ module.exports = globals => serviceName => ({
   delete: params => query => body =>
     globals.repositories[serviceName].delete(params)(query)(body),
 
+  _returnActual: result => id =>
+    result
+    .then(createdId => globals.repositories[serviceName]
+    .get({ id: id || createdId[0] })()()),
 });
