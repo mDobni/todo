@@ -5,7 +5,7 @@ module.exports = (globals) => {
 
   const save = params => query => body =>
     globals.repositories.user
-    .save(params)(query)(body);
+    .save(Object.assign({}, params, query))(new globals.models.User(body));
 
   return Object.assign({}, base, {
     create: params => query => body =>
